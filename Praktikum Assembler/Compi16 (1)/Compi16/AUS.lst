@@ -1,0 +1,59 @@
+                            ASSEMBLERLISTING
+
+                      FILE: AUS.TXT
+===============================================================================
+ 
+VL        000100011
+                                                        ; Quelltext des Moduls AUS.TXT
+V UPAUS  Y000000000                   ENT     UPAUS     ;symb. Adresse UPAUS auch in anderen
+                                                        ;Modulen bekannt machen
+-------------------------------------------------------------------------------
+PR B011010000010101   000   UPAUS     STA     ZAHL      ;Akkumulator speichern
+PR B011000000011001   001             LDA     TABMERK   ;Anfangsadresse der Tabelle holen
+PR B011010000011000   002             STA     TAB       ;und zur weiteren Berechnung ablegen
+PR B011000000010101   003             LDA     ZAHL      ;auszugebende Zahl in den Akkumulator laden
+PR B010100000010111   004   ZYKL1     CMP     ZEHN      ;Test, ob Zahl kleiner als Zehn ist
+PR B001000000001101   005             JLT     AUS1      ;ja, also Sprung zum Ausgeben
+                                                        ;nein, noch größer oder gleich Zehn, also zyklisch
+                                                        ;Zehn subtrahieren und dabei Tabellenzeiger erhöhen
+PR B011000000011000   006             LDA     TAB       ;Tabellenzeiger holen
+PR B100000000010110   007             ADD     EINS      ;Zeiger auf nächste Ziffer setzen
+PR B011010000011000   008             STA     TAB       ;veränderten Zeiger wieder abspeichern
+PR B011000000010101   009             LDA     ZAHL      ;Zahl holen
+PR B100010000010111   010             SUB     ZEHN      ;Zehn abziehen
+PR B011010000010101   011             STA     ZAHL      ;und wieder abspeichern
+PR B001110000000100   012             JMP     ZYKL1     ;diesen Zyklus solange ausführen, bis Zahl
+                                                        ;kleiner als Zehn ist
+                                                        ;Ausgabe
+PR B011001000011000   013   AUS1      LDA,I   TAB       ;über Tabellenzeiger auszugebenden ASCII-Code
+                                                        ;holen
+PA B011110000000000   014             WRA               ;ASCII-Code der Zehnerstelle ausgeben
+PR B011000000011001   015             LDA     TABMERK   ;Anfangsadresse der Tabelle holen
+PR B100000000010101   016             ADD     ZAHL      ;Tabellenzeiger um den Wert der Einerstelle
+                                                        ;erhöhen
+PR B011010000011000   017             STA     TAB       ;Tabellenzeiger für indirekte Adressierung
+                                                        ;speichern
+PR B011001000011000   018             LDA,I   TAB       ;über Tabellenzeiger auszugebenden ASCII-Code
+                                                        ;holen
+PA B011110000000000   019             WRA               ;ASCII-Code der Einerstelle ausgeben
+PA B010010000000000   020             RET               ;finales Return
+                                                        ;Definitionen
+PA D000000000000000   021   ZAHL      RST     1         ;Speicher für auszugebende Zahl
+PA D000000000000001   022   EINS      DEC     1         ;dezimale Eins für Zeigerrechnungen
+PA D000000000001010   023   ZEHN      DEC     10        ;dezimale Zehn für Abtrennung der Zehnerstelle
+                                                        ;von Zahl
+PA D000000000000000   024   TAB       RST     1         ;Speicherzelle für Tabellenzeiger
+                                                        
+PR D000000000011010   025   TABMERK   DEF     TABANF    ;Ablage für Tabellenanfangsadresse
+PA D000000000110000   026   TABANF    HEX     30        ;Tabelle der ASCII-Codes der Ziffern von Null
+                                                        ;bis Neun
+PA D000000000110001   027             HEX     31        ;ASCII-Code von Eins
+PA D000000000110010   028             HEX     32        ;
+PA D000000000110011   029             HEX     33        ;
+PA D000000000110100   030             HEX     34        ;
+PA D000000000110101   031             HEX     35        ;
+PA D000000000110110   032             HEX     36        ;
+PA D000000000110111   033             HEX     37        ;
+PA D000000000111000   034             HEX     38        ;
+PA D000000000111001   035             HEX     39        ; ASCII-Code von Neun
+===============================================================================
