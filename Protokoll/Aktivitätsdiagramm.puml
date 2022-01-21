@@ -2,35 +2,29 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:ClickServlet.handleRequest();
-:new page;
-if (Page.onSecurityCheck) then (true)
-  :Page.onInit();
-  if (isForward?) then (no)
-    :Process controls;
-    if (continue processing?) then (no)
-      stop
-    endif
 
-    if (isPost?) then (yes)
-      :Page.onPost();
-    else (no)
-      :Page.onGet();
-    endif
-    :Page.onRender();
-  endif
-else (false)
-endif
+switch (Tastaturpuffer auslesen)
+case ( <0 )
+  :ungültige Eingabe;
+  stop
+case ( == 0)
+  :Ergebnis = 0;
+case (             zwischen 0;4)
+  : A = Tastaturpuffer;
+  : B = 0 ;
+  : Ergebnis = 1;
+  while (B <= A)
+    :Ergebnis = Ergebnis * (B+1);
+    :B = B + 1;
+  endwhile(Fakultät berechnet)
 
-if (do redirect?) then (yes)
-  :redirect process;
-else
-  if (do forward?) then (yes)
-    :Forward request;
-  else (no)
-    :Render page template;
-  endif
-endif
+case ( >4 )
+  :ungültige Eingabe;
+  stop;
+
+endswitch
+
+:Ergebnis auf Bildschirm Ausgeben;
 
 stop
 
