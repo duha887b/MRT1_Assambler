@@ -1,7 +1,5 @@
 @startuml
 'https://plantuml.com/activity-diagram-beta
-
-
 (*) --> "**Variablen Dekleration**
           COUNTER = 1
           ERG = 1
@@ -15,9 +13,9 @@
 
 if "FAKLT = 0" then
 --> [true]"Ausgabe ERG"
--->(*)
+-left->(*)
 else
-    if "FAKLT = 1" then
+    -->if "FAKLT = 1" then
     -> [true]"Ausgabe ERG"
     else
         if "FAKLT > 4" then
