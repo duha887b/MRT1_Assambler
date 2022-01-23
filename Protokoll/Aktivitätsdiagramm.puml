@@ -13,11 +13,6 @@
 -->"Tastaturpuffer auslesen
     & in DEC auf FAKLT speichern"
 
--->"COUNTER = EINS
-ERG = EINS
-ERGH = EINS
-ERG2 = EINS + EINS"
-
 if "FAKLT = 0" then
 --> [true]"Ausgabe ERG"
 -->(*)
