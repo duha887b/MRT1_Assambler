@@ -1,31 +1,65 @@
 @startuml
 'https://plantuml.com/activity-diagram-beta
 
-start
 
-switch (Tastaturpuffer auslesen)
-case ( <0 )
-  :ungültige Eingabe;
-  stop
-case ( == 0)
-  :Ergebnis = 0;
-case (             zwischen 0;4)
-  : A = Tastaturpuffer;
-  : B = 0 ;
-  : Ergebnis = 1;
-  while (B <= A)
-    :Ergebnis = Ergebnis * (B+1);
-    :B = B + 1;
-  endwhile(Fakultät berechnet)
+(*) --> "Variablen Dekleration
+          ZERO = 0
+          EINS = 1
+          VIER = 4
+          COUNTER = 1
+          ERG = 1
+          ERG2 = 2
+          ERGH = 1
+          FAKLT = 0
+          ATOI = 48"
 
-case ( >4 )
-  :ungültige Eingabe;
-  stop;
+-->"Tastaturpuffer auslesen
+    & in DEC auf FAKLT speichern"
 
-endswitch
+-->"COUNTER = EINS
+ERG = EINS
+ERGH = EINS
+ERG2 = EINS + EINS"
 
-:Ergebnis auf Bildschirm Ausgeben;
+if "FAKLT = 0" then
+--> [true]"Ausgabe ERG"
+-->(*)
+else
+    if "FAKLT = 1" then
+    -> [true]"Ausgabe ERG"
+    else
+        if "FAKLT > 4" then
+        -->[true](*)
+        else
+        ->[false]"LOOP"
+        Endif
+        Endif
+        Endif
 
-stop
+--->if "FAKLT = COUNTER" then
+    -->[true]"Ausgabe ERG"
+    else
+    -->[false]"LOOP2"
+    Endif
+
+-->"ERG = ERG + ERGH"
+-->"ERG2 = ERG2 - EINS"
+
+if "ERG2 = EINS" then
+    -->[true]"LOOP3"
+    -->"ERGH = ERG"
+    -->"COUNTER = COUNTER + 1"
+    -->"ERG2 = COUNTER + 1"
+    -->"LOOP"
+    else
+    -->[false]"LOOP2"
+    Endif
+
+
+
+
+
+
+
 
 @enduml

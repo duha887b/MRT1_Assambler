@@ -1,11 +1,34 @@
-;Dieses Programm schreibt die Buchstaben A bis F auf den Schirm.
-   LDA ACODE    ;ASCII-Code für „A“ laden
-LOOP WRA        ;Zeichen auf Schirm ausgeben
-   CMP ECODE    ;mit Endcode vergleichen
-   JEQ ENDE     ;wenn Endcode, dann Sprung zu ENDE
-   ADD EINS     ;Zeichencode um 1 erhöhen
-   JMP LOOP     ;Sprung zurück, alles wiederholen
-ENDE HLT        ;fertig
-ACODE DEC 65    ;ASCII-Code für „A“
-ECODE HEX 46    ;ASCII-Code für „F“
-EINS DEC 1      ;dezimale Eins zum inkrementieren
+EXT UPAUS
+
+START     RDA 
+          CMP ZERO
+          JEQ NULL
+          CMP VIER
+          JGT ERROR
+          STA COUNTER
+
+          ADD ZWERG
+LOOP      STA ZWERG
+          LDA COUNTER
+          SUB EINS
+          STA COUNTER
+          CMP ZERO
+          ADD ZWERG
+          JNE LOOP
+
+
+NULL      LDA ERG
+          JMP AUSGABE
+
+AUSGABE   JSB UPAUS
+          HLT
+
+
+ZERO      HEX 30
+ERG       DEC 1
+VIER      HEX 34
+COUNTER   HEX 30
+ZWERG     DEC 1
+EINS      DEC 1 
+
+ERROR     HLT
