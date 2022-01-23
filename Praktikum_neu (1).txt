@@ -1,0 +1,66 @@
+          EXT UPAUS
+
+START     RDA
+          SUB ATOI
+          STA FAKLT 
+
+INITIAL   LDA EINS
+          STA COUNTER
+          STA ERG
+          STA ERGH
+          ADD EINS
+          STA ERG2
+
+          LDA FAKLT
+
+          CMP ZERO
+          JEQ AUSGABE
+
+          CMP EINS
+          JEQ AUSGABE
+
+          CMP VIER
+          JGT ERROR
+          
+          
+LOOP      LDA COUNTER
+          CMP FAKLT
+          JEQ AUSGABE
+          JMP LOOP2
+
+LOOP2     LDA ERG
+          ADD ERGH
+          STA ERG
+          LDA ERG2
+          SUB EINS
+          STA ERG2
+          CMP EINS
+          JEQ LOOP3
+          JMP LOOP2
+
+LOOP3     LDA ERG
+          STA ERGH
+          LDA COUNTER
+          ADD EINS
+          STA COUNTER
+          ADD EINS
+          STA ERG2
+          JMP LOOP
+
+AUSGABE   LDA ERG
+          JSB UPAUS
+          HLT
+
+ERROR     HLT
+
+
+ZERO      DEC 0
+EINS      DEC 1
+VIER      DEC 4
+COUNTER   DEC 1
+ERG       DEC 1
+ERG2      DEC 2
+ERGH      DEC 1
+FAKLT     DEC 0
+ATOI      DEC 48
+
