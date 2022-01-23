@@ -2,16 +2,13 @@
 'https://plantuml.com/activity-diagram-beta
 
 
-(*) --> "Variablen Dekleration
-          ZERO = 0
-          EINS = 1
-          VIER = 4
+(*) --> "**Variablen Dekleration**
           COUNTER = 1
           ERG = 1
           ERG2 = 2
           ERGH = 1
           FAKLT = 0
-          ATOI = 48"
+          "
 
 -->"Tastaturpuffer auslesen
     & in DEC auf FAKLT speichern"
@@ -43,7 +40,7 @@ else
     Endif
 
 -->"ERG = ERG + ERGH"
--->"ERG2 = ERG2 - EINS"
+-->"ERG2 = ERG2 - 1"
 
 if "ERG2 = EINS" then
     -->[true]"LOOP3"
