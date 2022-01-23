@@ -15,10 +15,10 @@ if "FAKLT = 0" then
 --> [true]"Ausgabe ERG"
 -left->(*)
 else
-    -->if "FAKLT = 1" then
+    -left->if "FAKLT = 1" then
     -> [true]"Ausgabe ERG"
     else
-        if "FAKLT > 4" then
+        -left->if "FAKLT > 4" then
         -->[true](*)
         else
         ->[false]"LOOP"
