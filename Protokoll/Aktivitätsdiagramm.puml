@@ -26,7 +26,7 @@ else
         Endif
         Endif
 
---->if "FAKLT = COUNTER" then
+-->if "FAKLT = COUNTER" then
     -->[true]"Ausgabe ERG"
     else
     -->[false]"LOOP2"
