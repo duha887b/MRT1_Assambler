@@ -1,0 +1,74 @@
+                            ASSEMBLERLISTING
+
+                      FILE: Fakultät.txt
+===============================================================================
+ 
+VL        000110001
+V UPAUS  E                            EXT     UPAUS     
+                                                        
+-------------------------------------------------------------------------------
+PA B011100000000000   000   START     RDA               
+PR B100010000110001   001             SUB     ATOI      
+PR B011010000110000   002             STA     FAKLT     
+                                                        
+PR B011000000101010   003   INITIAL   LDA     EINS      
+PR B011010000101100   004             STA     COUNTER   
+PR B011010000101101   005             STA     ERG       
+PR B011010000101111   006             STA     ERGH      
+PR B100000000101010   007             ADD     EINS      
+PR B011010000101110   008             STA     ERG2      
+                                                        
+PR B011000000110000   009             LDA     FAKLT     
+                                                        
+PR B010100000101001   010             CMP     ZERO      
+PR B000100000100101   011             JEQ     AUSGABE   
+                                                        
+PR B010100000101010   012             CMP     EINS      
+PR B000100000100101   013             JEQ     AUSGABE   
+                                                        
+PR B010100000101011   014             CMP     VIER      
+PR B000010000101000   015             JGT     ERROR     
+                                                        
+                                                        
+PR B011000000101100   016   LOOP      LDA     COUNTER   
+PR B010100000110000   017             CMP     FAKLT     
+PR B000100000100101   018             JEQ     AUSGABE   
+PR B001110000010100   019             JMP     LOOP2     
+                                                        
+PR B011000000101101   020   LOOP2     LDA     ERG       
+PR B100000000101111   021             ADD     ERGH      
+PR B011010000101101   022             STA     ERG       
+PR B011000000101110   023             LDA     ERG2      
+PR B100010000101010   024             SUB     EINS      
+PR B011010000101110   025             STA     ERG2      
+PR B010100000101010   026             CMP     EINS      
+PR B000100000011101   027             JEQ     LOOP3     
+PR B001110000010100   028             JMP     LOOP2     
+                                                        
+PR B011000000101101   029   LOOP3     LDA     ERG       
+PR B011010000101111   030             STA     ERGH      
+PR B011000000101100   031             LDA     COUNTER   
+PR B100000000101010   032             ADD     EINS      
+PR B011010000101100   033             STA     COUNTER   
+PR B100000000101010   034             ADD     EINS      
+PR B011010000101110   035             STA     ERG2      
+PR B001110000010000   036             JMP     LOOP      
+                                                        
+PR B011000000101101   037   AUSGABE   LDA     ERG       
+PREB010000    UPAUS   038             JSB     UPAUS     
+PA B010110000000000   039             HLT               
+                                                        
+PA B010110000000000   040   ERROR     HLT               
+                                                        
+                                                        
+PA D000000000000000   041   ZERO      DEC     0         
+PA D000000000000001   042   EINS      DEC     1         
+PA D000000000000100   043   VIER      DEC     4         
+PA D000000000000001   044   COUNTER   DEC     1         
+PA D000000000000001   045   ERG       DEC     1         
+PA D000000000000010   046   ERG2      DEC     2         
+PA D000000000000001   047   ERGH      DEC     1         
+PA D000000000000000   048   FAKLT     DEC     0         
+PA D000000000110000   049   ATOI      DEC     48        
+                                                        
+===============================================================================
